@@ -4,6 +4,7 @@
  ```
  git clone https://github.com/q00Dree/dijkstra-algorithm.git \
  && cd dijkstra-algorithm \
+ && cd src \
  && cd DijkstraImplementation.EntryPoint \
  && dotnet run
  ```
