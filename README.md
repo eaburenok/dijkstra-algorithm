@@ -10,7 +10,7 @@
 
 2. **В приложении, а именно в модуле ```DijkstraImplementation.EntryPoint``` уже введена матрица следующего графа.**
 
-![Задание для Варианта 18 Сафиуллин](https://github.com/q00Dree/dijkstra-algorithm/blob/master/docs/task_for_18.jpg)
+![Задание для Варианта 18 Сафиуллин](https://github.com/q00Dree/dijkstra-algorithm/blob/master/docs/task_for_18_updated.jpg)
 
 ```csharp
 int[,] graph = new[,]
