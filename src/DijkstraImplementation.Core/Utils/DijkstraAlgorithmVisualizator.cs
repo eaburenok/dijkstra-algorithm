@@ -38,7 +38,7 @@ namespace DijkstraImplementation.Core.Utils
             Console.ForegroundColor = TextColor;
             Console.BackgroundColor = BackgroundColor;
 
-            Console.Write($"Кратчайший путь [{sourceNode + 1} -> {destinationNode + 1}]: ");
+            Console.Write($"Поиск наименьшего пути.... Поиск выполнен... Кратчайший путь: [{sourceNode + 1} -> {destinationNode + 1}]: ");
 
             List<int> path = DijkstraAlgorithm.Process(graph, sourceNode, destinationNode);
 

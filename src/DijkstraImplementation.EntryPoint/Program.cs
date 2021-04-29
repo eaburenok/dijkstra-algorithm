@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using DijkstraImplementation.Core;
+﻿using DijkstraImplementation.Core;
 using DijkstraImplementation.Core.Interfaces;
 using DijkstraImplementation.Core.Utils;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading;
 
 namespace DijkstraImplementation.EntryPoint
 {
@@ -12,19 +13,43 @@ namespace DijkstraImplementation.EntryPoint
         static void Main(string[] args)
         {
 
-            // Создаем граф для Варианта 18 из файла.
-            int[,] graph = new[,]
+            int[,] graph = new int[8, 8];
+
+
+            using (FileStream fstream = new FileStream(@"C:\Users\User\Source\Repos\dijkstra-algorithm2\src\TextFile.txt", FileMode.OpenOrCreate))
             {
-                        /*1*/  /*2*/   /*3*/   /*4*/   /*5*/   /*6*/   /*7*/   /*8*/
-              /*1*/   {   0,     2,      3,      8,      0,      0,      0,      0   }, 
-              /*2*/   {   2,     0,      0,      2,      0,      1,      0,      0   }, 
-              /*3*/   {   3,     0,      0,      5,      0,      6,      0,      3   }, 
-              /*4*/   {   8,     2,      5,      0,      3,      5,      0,      0   }, 
-              /*5*/   {   0,     0,      0,      3,      0,      6,      0,      7   }, 
-              /*6*/   {   0,     1,      6,      5,      6,      0,      12,     8   }, 
-              /*7*/   {   0,     0,      0,      0,      0,      12,     0,      5   }, 
-              /*8*/   {   0,     0,      3,      0,      7,      8,      5,      0   }, 
-            };
+                using (StreamReader dataStream = new StreamReader(fstream))
+                {
+
+                    string Content = dataStream.ReadToEnd();
+
+                    string[] SplitAtLines = Content.Split("\n");
+
+                    for (int i = 0; i < SplitAtLines.Length; i++)
+                    {
+                        var Trimed = SplitAtLines[i].Replace(" ", string.Empty).Replace("\r\n", string.Empty);
+                        int[] Splitted = Trimed.Split(',').Select(n => int.Parse(n)).ToArray();
+
+                        for (int j = 0; j < Splitted.Length; j++)
+                        {
+                            graph[i, j] = Splitted[j];
+                        }
+
+                    }
+
+                }
+
+
+            }
+            int a = Console.WindowWidth;
+            Console.SetCursorPosition(a / 2,200);
+            Console.WriteLine("Загрузка файла с массивом данных");
+            Thread.Sleep(5000);
+            Console.WriteLine("....");
+            Thread.Sleep(2000);
+            Console.WriteLine("Загрузка выполнена");
+          
+
 
             // Создаем алгоритм, который реализует интерфейс IDijkstraAlgorithm.
             IDijkstraAlgorithm dijkstraAlgorithmImpl = new DijkstraAlgorithmImpl();
@@ -32,7 +57,7 @@ namespace DijkstraImplementation.EntryPoint
             // Создаем визуализатор для вывода работы алгоритма в консоль.
             DijkstraAlgorithmVisualizator dijkstraAlgorithmVisualizator = new DijkstraAlgorithmVisualizator(
                 dijkstraAlgorithm: dijkstraAlgorithmImpl,
-                textColor: ConsoleColor.Green,
+                textColor: ConsoleColor.Red,
                 backgroundColor: ConsoleColor.Black);
 
             // Найдем кратчайшие пути до каждой вершины графа.
